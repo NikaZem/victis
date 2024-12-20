@@ -1,0 +1,181 @@
+/* Основные стили */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+}
+body a{
+    color: white;
+}
+
+.container {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%; /* Контейнер занимает всю ширину */
+    max-width: calc(100% - 200px); /* Максимальная ширина с учетом отступов */
+    margin: 20px 100px; /* Отступы по 100px с каждой стороны */
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #7099db;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+    border: none;
+    width: 100%;
+    max-width: 300px;
+}
+
+.btn:hover {
+    background-color: #477cd1;
+}
+
+.btn-small {
+    display: inline-block;
+    border-radius: 5px;
+    margin-top: 10px;
+    text-decoration: none;
+    padding: 5px 10px;
+    margin-left: 5px;
+    background-color: #7099db;
+}
+
+.btn-delete{
+    padding: 5px 10px;
+    margin-left: 5px;
+    background-color: #7099db;
+}
+
+.btn-delete:hover {
+    background-color: #477cd1;
+}
+
+.btn-small:hover {
+    background-color: #477cd1;
+}
+
+.add-habit-form, .edit-habit-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+}
+
+.form-group {
+    width: 100%;
+    text-align: left;
+}
+
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%; /* Контейнер занимает всю ширину */
+    max-width: calc(100% - 200px); /* Максимальная ширина с учетом отступов */
+    margin: 20px 50px; /* Отступы по 100px с каждой стороны */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+
+
+.habits-list {
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+}
+
+.habits-list li {
+    background: #e9ecef;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Добавляем перенос строки, если элементы не помещаются */
+}
+
+.description {
+    font-size: 0.9em;
+    color: #6c757d;
+    margin-top: 5px;
+}
+
+.progress {
+    font-size: 0.9em;
+    color: #6c757d;
+}
+
+.days-left {
+    font-size: 0.9em;
+    color: #007BFF;
+}
+
+.goal-reached {
+    color: #28a745;
+    font-weight: bold;
+}
+
+/* Увеличиваем ширину блока .actions */
+.actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+/* Стили для flash-сообщений */
+.flash-messages {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    text-align: center;
+}
+
+.flash {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    transform: translateY(20px);
+}
+
+.flash.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.error {
+    background-color: #f8d7da;
+    color: #721c24;
+}

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habit Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Трекер привычек</h1>
+        <a href="{{ url_for('add_habit') }}" class="btn">Добавить привычку</a>
+
+        <!-- Список привычек -->
+        <ul class="habits-list">
+            {% for habit in habits if not habit.is_goal_reached() %}
+                <li id="habit-{{ habit.id }}">
+                    <strong>{{ habit.name }}</strong>
+                    <p class="description">{{ habit.description }}</p>
+                    <span class="progress">Прогресс: {{ habit.completed_days }} дней</span>
+                    <span class="days-left">Осталось: {{ habit.days_left() }} дней</span>
+                    <div class="actions">
+                        <!-- Кнопка "Отметить" -->
+                        <form action="{{ url_for('complete', id=habit.id) }}" method="POST" class="complete-form">
+                            <button type="submit" class="btn-small">Отметить</button>
+                        </form>
+                        <a href="{{ url_for('edit', id=habit.id) }}" class="btn-small">Редактировать</a>
+                        <a href="{{ url_for('delete', id=habit.id) }}" class="btn-small">Удалить</a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <!-- Назад -->
+        <a href="{{ url_for('index') }}" class="btn">Выйти</a>
+
+        <!-- Диаграммы привычек -->
+        <div class="charts-section">
+            <h2>Ваши диаграммы</h2>
+            <ul class="charts-list">
+                <!-- Диаграммы незавершённых привычек -->
+                {% for habit in habits %}
+                <li id="chart-{{ habit.id }}">
+                    <img src="{{ url_for('progress_chart', habit_id=habit.id) }}" alt="Прогресс: {{ habit.name }}">
+                    <p>{{ generate_motivation((habit.completed_days / habit.target_days) * 100) }}</p>
+                </li>
+                {% endfor %}
+
+                <!-- Диаграммы завершённых привычек -->
+                {% for habit in completed_habits %}
+                <li id="chart-completed-{{ habit.id }}">
+                    <img src="{{ url_for('progress_chart', habit_id=habit.id) }}" alt="Завершено: {{ habit.name }}">
+                    <button onclick="deleteCompletedChart({{ habit.id }})" class="btn-small">Убрать</button>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <!-- Flash-сообщения -->
+    <div class="flash-messages">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash {{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

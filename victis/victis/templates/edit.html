@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редактирование привычки</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Редактирование привычки</h1>
+        <form method="POST" class="edit-habit-form">
+            <div class="form-group">
+                <label for="habit_name">Название привычки:</label>
+                <input type="text" name="habit_name" id="habit_name" value="{{ habit.name }}" required autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="habit_description">Описание привычки:</label>
+                <textarea name="habit_description" id="habit_description" autocomplete="off">{{ habit.description }}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="habit_target_days">Целевое количество дней:</label>
+                <input type="number" name="habit_target_days" id="habit_target_days" value="{{ habit.target_days }}" min="1" required autocomplete="off">
+            </div>
+            <button type="submit" class="btn">Сохранить</button>
+        </form>
+        <a href="{{ url_for('home') }}" class="btn">Назад</a>
+    </div>
+</body>
+</html>
